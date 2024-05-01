@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analog Clock</title>
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+    }
+
+    .clock {
+        width: 200px;
+        height: 200px;
+        border: 10px solid #333;
+        border-radius: 50%;
+        position: relative;
+    }
+
+    .hour, .minute, .second {
+        position: absolute;
+        background-color: #333;
+        transform-origin: center;
+    }
+
+    .hour {
+        width: 6px;
+        height: 50px;
+        top: 50px;
+        left: 97px;
+    }
+
+    .minute {
+        width: 4px;
+        height: 70px;
+        top: 30px;
+        left: 98px;
+    }
+
+    .second {
+        width: 2px;
+        height: 90px;
+        top: 10px;
+        left: 99px;
+    }
+</style>
+</head>
+<body>
+<div class="clock">
+    <div class="hour" id="hour"></div>
+    <div class="minute" id="minute"></div>
+    <div class="second" id="second"></div>
+</div>
+<script>
+    function updateClock() {
+        const now = new Date();
+        const hour = now.getHours() % 12;
+        const minute = now.getMinutes();
+        const second = now.getSeconds();
+
+        const hourAngle = (hour * 30) + (minute * 0.5);
+        const minuteAngle = minute * 6;
+        const secondAngle = second * 6;
+
+        document.getElementById('hour').style.transform = `rotate(${hourAngle}deg)`;
+        document.getElementById('minute').style.transform = `rotate(${minuteAngle}deg)`;
+        document.getElementById('second').style.transform = `rotate(${secondAngle}deg)`;
+    }
+
+    setInterval(updateClock, 1000);
+</script>
+</body>
+</html>
